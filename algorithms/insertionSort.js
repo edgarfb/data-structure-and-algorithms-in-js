@@ -1,22 +1,18 @@
-let swap = require("./../utils/swap");
-let unSortedNumbers = require("./../utils/randomNumbers");
-
-let nums = unSortedNumbers(5);
-
-function insertionSort(unOrderArray) {
+function insertionSort(unSortedArr) {
   let start = new Date().getTime();
-  let arr = [...unOrderArray];
+  let arr = [...unSortedArr];
+
   for (let i = 1; i < arr.length; i++) {
-    let key = i;
-    while (key > 0) {
-      if (arr[key] < arr[key - 1]) {
-        swap(arr, key - 1, key);
-      }
-      key--;
+    let current = arr[i];
+    let j = i;
+    while (j > 0 && arr[j - 1] >= arr[j]) {
+      arr[j] = arr[j - 1];
+      j--;
+      arr[j] = current;
     }
   }
   let end = new Date().getTime();
-  console.log(`Insertion Sort Time: ${end - start}`);
+  console.log(`Insertion Sort Time with ${arr.length}: ${end - start}ms`);
   return arr;
 }
 
